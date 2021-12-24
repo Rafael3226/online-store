@@ -14,7 +14,7 @@ function LogOut() {
   if (user.accessToken === '') return <></>
   return (
     <Button type="button" onClick={handleLogOut}>
-      <p className="w-full text-white">Log Out</p>
+      <p className="w-full text-white">Logout</p>
     </Button>
   )
 }

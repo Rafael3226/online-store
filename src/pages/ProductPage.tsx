@@ -1,7 +1,7 @@
 import React from 'react'
 import ProductForm from '../components/forms/ProductForm'
+import Container from '../containers/Container'
 import DarkMode from '../containers/DarkMode'
-import ResponsiveCenter from '../containers/ResponsiveCenter'
 import NavBar from '../layout/NavBar'
 
 function ProductPage() {
@@ -9,9 +9,9 @@ function ProductPage() {
     <>
       <NavBar />
       <DarkMode>
-        <ResponsiveCenter>
+        <Container>
           <ProductForm />
-        </ResponsiveCenter>
+        </Container>
       </DarkMode>
     </>
   )

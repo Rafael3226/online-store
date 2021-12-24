@@ -18,9 +18,6 @@ function Switch({
 }) {
   return (
     <div className="w-full flex content-center">
-      <Label className={checked ? 'invisible' : ''} htmlFor={id}>
-        {labelF}
-      </Label>
       <div className="flex content-center my-1">
         <div
           className={`bg-white w-3 h-3 my-1 rounded-full shadow-md transform
@@ -38,8 +35,8 @@ function Switch({
           checked={checked}
         />
       </div>
-      <Label className={`ml-2 ${checked ? '' : 'invisible'}`} htmlFor={id}>
-        {labelT}
+      <Label className="mx-2" htmlFor={id}>
+        {checked ? labelT : labelF}
       </Label>
     </div>
   )

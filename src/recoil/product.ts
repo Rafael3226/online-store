@@ -1,6 +1,7 @@
 import { atom } from 'recoil'
 
 export interface IProduct {
+  id: string
   name: string
   description: string
   price: number
@@ -8,6 +9,7 @@ export interface IProduct {
 }
 
 export const productDefault: IProduct = {
+  id: '',
   name: '',
   description: '',
   price: 0,
