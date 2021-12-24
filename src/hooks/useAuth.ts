@@ -33,8 +33,6 @@ function useAuth() {
     setExecuted(true)
     onAuthStateChanged(auth, nextOrObserver, onError)
   }
-
-  console.log('useAuth')
 }
 
 export default useAuth

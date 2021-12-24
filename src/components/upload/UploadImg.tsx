@@ -1,24 +1,39 @@
-import React from 'react'
-import { useRecoilValue, useSetRecoilState } from 'recoil'
-import useStorage from '../../hooks/useStorage'
+import React, { useState } from 'react'
+import { useRecoilState, useSetRecoilState } from 'recoil'
+import { saveFile } from '../../db/storage'
 import { errorAtom } from '../../recoil/error'
-import { productAtom } from '../../recoil/product'
+import { IProduct, productAtom } from '../../recoil/product'
 import Button from '../basic/Button'
 import Label from '../basic/Label'
-import ProgressBar from './ProgressBar'
 
 const UploadImg = () => {
-  const { images } = useRecoilValue(productAtom)
+  const [product, setProduct] = useRecoilState(productAtom)
   const setError = useSetRecoilState(errorAtom)
-  const { progress, saveFile } = useStorage()
+  const [loading, setLoading] = useState(false)
   const types = ['image/png', 'image/jpeg']
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files
     setError('')
     if (files && files[0]) {
-      if (types.includes(files[0].type)) {
-        saveFile(files[0])
+      const file = files[0]
+      if (types.includes(file.type)) {
+        setLoading(true)
+        saveFile(file)
+          .then((url) => {
+            setProduct((p: IProduct) => {
+              const images = [url]
+              p.images.forEach((link) => {
+                images.push(link)
+              })
+              return { ...p, images }
+            })
+          })
+          .catch((e) => {
+            setError(e.message)
+          })
+          .finally(() => setLoading(false))
+        // working
       } else {
         setError('Please select an image file (png or jpg)')
       }
@@ -40,13 +55,11 @@ const UploadImg = () => {
           id="product-images"
           type="file"
           onChange={handleChange}
-          disabled={progress !== 0 || images.length === 3}
+          disabled={product.images.length >= 3}
           className="text-primary-500 font-light dark:text-primary-300 invisible"
         />
       </div>
-      <div>
-        <ProgressBar progress={progress} />
-      </div>
+      {loading && <Label>loading...</Label>}
     </>
   )
 }

@@ -39,10 +39,8 @@ function ProductForm() {
     const collection = new FsCollection('products')
     collection
       .saveDocument({ name, price, description, images })
-      .then((id) => {
-        alert('The product has been saved successfully')
-      })
       .then(() => navigate('/products', { replace: true }))
+      .then(() => alert('The product has been saved successfully'))
       .catch((e) => {
         setError(e.message)
       })
@@ -54,7 +52,7 @@ function ProductForm() {
     setLoading(true)
     const collection = new FsCollection('products')
     collection
-      .saveDocument({ name, price, description, images })
+      .updateDocument(id, { name, price, description, images })
       .then(() => {
         alert('The product has been saved successfully')
       })
