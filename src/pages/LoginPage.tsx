@@ -3,7 +3,7 @@ import ErrorAlert from '../components/alerts/ErrorAlert'
 import DarkMode from '../containers/DarkMode'
 import ResponsiveCenter from '../containers/ResponsiveCenter'
 import NavBar from '../layout/NavBar'
-import LoginForm from '../components/forms/auth/LoginForm'
+import LoginForm from '../components/forms/LoginForm'
 
 function LoginPage() {
   return (

@@ -5,7 +5,7 @@ function NavLinks() {
   return (
     <>
       <NavLink to="/">Home</NavLink>
-      <NavLink to="/product/list">Products</NavLink>
+      <NavLink to="/products">Products</NavLink>
     </>
   )
 }

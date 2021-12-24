@@ -6,10 +6,10 @@ import {
 } from 'firebase/auth'
 import React, { useEffect, useState } from 'react'
 import { useSetRecoilState } from 'recoil'
-import { errorAtom } from '../../../recoil/error'
-import { IUser, userAtom } from '../../../recoil/user'
-import Button from '../../basic/Button'
-import Input from '../../basic/Input'
+import { errorAtom } from '../../recoil/error'
+import { IUser, userAtom } from '../../recoil/user'
+import Button from '../basic/Button'
+import Input from '../basic/Input'
 
 function SingupForm() {
   const auth = getAuth()
