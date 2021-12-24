@@ -1,7 +1,7 @@
 import React from 'react'
 
-function SingUp() {
+function Layout() {
   return <div></div>
 }
 
-export default SingUp
+export default Layout
