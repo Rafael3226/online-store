@@ -4,7 +4,7 @@ export interface IProduct {
   id: string
   name: string
   description: string
-  price: number
+  price: string
   images: string[]
 }
 
@@ -12,7 +12,7 @@ export const productDefault: IProduct = {
   id: '',
   name: '',
   description: '',
-  price: 0,
+  price: '',
   images: [],
 }
 

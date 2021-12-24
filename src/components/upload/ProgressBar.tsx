@@ -1,9 +1,8 @@
 import React from 'react'
-import useStorage from '../../hooks/useStorage'
 import { motion } from 'framer-motion'
 
-const ProgressBar = () => {
-  const { progress } = useStorage()
+const ProgressBar = ({ progress }: { progress: number }) => {
+  if (!progress) return <></>
   return (
     <motion.div
       className="progress-bar"

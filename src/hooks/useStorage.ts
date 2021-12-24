@@ -10,45 +10,41 @@ import { firebaseStorage } from '../firebase'
 import { errorAtom } from '../recoil/error'
 import { IProduct, productAtom } from '../recoil/product'
 
-const fileDef = new File([], '')
-
 const useStorage = () => {
-  const [file, setFile] = useState<File>(fileDef)
+  const [url, setURL] = useState<string>('')
   const [progress, setProgress] = useState<number>(0)
   const setProduct = useSetRecoilState<IProduct>(productAtom)
-  const setError = useSetRecoilState(errorAtom)
-  const storageRef = ref(firebaseStorage)
+  const setError = useSetRecoilState<string>(errorAtom)
 
-  function onNext(snap: { bytesTransferred: number; totalBytes: number }) {
-    let percentage = (snap.bytesTransferred / snap.totalBytes) * 100
-    setProgress(percentage)
-  }
-  function onError(err: StorageError) {
-    setError(err.toString())
-  }
-  function onComplete() {
-    getDownloadURL(storageRef)
-      .then((url) => {
-        setProduct((p: IProduct) => {
-          const newProduct = { ...p }
-          newProduct.images.push(url)
-          return newProduct
+  function saveFile(newFile: File) {
+    const fbRef = ref(firebaseStorage)
+    function onNext(snap: { bytesTransferred: number; totalBytes: number }) {
+      let percentage = (snap.bytesTransferred / snap.totalBytes) * 100
+      setProgress(percentage)
+    }
+    function onError(err: StorageError) {
+      setError(err.toString())
+    }
+    function onComplete() {
+      getDownloadURL(ref(fbRef))
+        .then((url) => {
+          setProduct((p: IProduct) => {
+            const newProduct = { ...p }
+            newProduct.images.push(url)
+            return newProduct
+          })
         })
-      })
-      .catch((err) => setError(err.message))
-      .finally(() => clean())
-  }
-  function saveFile(file: File) {
-    setFile(file)
-    uploadBytesResumable(storageRef, file).then((snapshot) => {
+        .catch((err) => setError(err.message))
+        .finally(() => {
+          setURL('')
+          setProgress(0)
+        })
+    }
+    uploadBytesResumable(fbRef, newFile).then((snapshot) => {
       snapshot.task.on('state_changed', onNext, onError, onComplete)
     })
   }
-  function clean() {
-    setFile(fileDef)
-    setProgress(0)
-  }
-  return { progress, file, saveFile }
+  return { progress, url, saveFile }
 }
 
 export default useStorage

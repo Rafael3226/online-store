@@ -12,16 +12,20 @@ function CardHorisontal({
   onClick: Function
 }) {
   return (
-    <div className="w-full" onClick={() => onClick()}>
+    <div className="w-3/4">
       <div
         className="h-auto flex-none bg-cover rounded text-center overflow-hidden"
         style={{ backgroundImage: `url(${imgURL})` }}
-      ></div>
-      <div className="border border-neutral-400 bg-white rounded  p-4 flex flex-col justify-between leading-normal">
-        <div className="mb-8">
-          <div className="text-neutral-900 font-bold text-xl mb-2">{name}</div>
-          <p className="text-neutral-700 text-base">{description}</p>
+        onClick={() => onClick()}
+      />
+      <div
+        className="border border-neutral-300 rounded  p-4 flex flex-col justify-between leading-normal"
+        onClick={() => onClick()}
+      >
+        <div className="text-primary-500 dark:text-primary-300 font-bold text-xl mb-2">
+          {name}
         </div>
+        <p className="text-primary-500 dark:text-primary-300">{description}</p>
       </div>
     </div>
   )

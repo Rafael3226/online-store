@@ -7,8 +7,8 @@ import NavBar from '../layout/NavBar'
 function ProductPage() {
   return (
     <>
-      <NavBar />
       <DarkMode>
+        <NavBar />
         <Container>
           <ProductForm />
         </Container>

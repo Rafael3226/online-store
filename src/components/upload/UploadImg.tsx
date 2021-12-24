@@ -1,15 +1,15 @@
 import React from 'react'
-import { useSetRecoilState } from 'recoil'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 import useStorage from '../../hooks/useStorage'
 import { errorAtom } from '../../recoil/error'
-import ErrorAlert from '../alerts/ErrorAlert'
+import { productAtom } from '../../recoil/product'
 import Label from '../basic/Label'
 import ProgressBar from './ProgressBar'
 
-const UploadForm = () => {
+const UploadImg = () => {
+  const { images } = useRecoilValue(productAtom)
   const setError = useSetRecoilState(errorAtom)
-  const { file, saveFile } = useStorage()
-
+  const { progress, saveFile } = useStorage()
   const types = ['image/png', 'image/jpeg']
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -26,16 +26,19 @@ const UploadForm = () => {
   return (
     <>
       <div>
-        <input type="file" onChange={handleChange} />
-        <Label>+</Label>
+        <input
+          type="file"
+          onChange={handleChange}
+          disabled={progress !== 0 || images.length === 3}
+          className="text-primary-500 font-light dark:text-primary-300"
+        />
+        <Label className="ml-1">(Images Max 3)</Label>
       </div>
-      <div className="output">
-        {file && <div>{file.name}</div>}
-        {file && <ProgressBar />}
+      <div>
+        <ProgressBar progress={progress} />
       </div>
-      <ErrorAlert />
     </>
   )
 }
 
-export default UploadForm
+export default UploadImg

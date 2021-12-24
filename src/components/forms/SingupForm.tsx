@@ -67,7 +67,6 @@ function SingupForm() {
       <Input
         label="Password"
         type="password"
-        name="password2"
         value={password2}
         onChange={(e) => setPassword2(e.target.value)}
       />
