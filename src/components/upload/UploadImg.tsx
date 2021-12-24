@@ -50,6 +50,7 @@ const UploadImg = () => {
           label="+"
           onClick={() => document?.getElementById('product-images')?.click()}
           type={'submit'}
+          disabled={product.images.length >= 3}
         />
         <input
           id="product-images"
