@@ -1,5 +1,5 @@
 import React from 'react'
-import { Routes, Route, BrowserRouter, Router } from 'react-router-dom'
+import { Routes, Route, BrowserRouter } from 'react-router-dom'
 import RequireAuth from './containers/RequireAuth'
 import DefaultPage from './pages/DefaultPage'
 import HomePage from './pages/HomePage'
