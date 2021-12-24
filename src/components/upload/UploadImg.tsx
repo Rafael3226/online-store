@@ -3,6 +3,7 @@ import { useRecoilValue, useSetRecoilState } from 'recoil'
 import useStorage from '../../hooks/useStorage'
 import { errorAtom } from '../../recoil/error'
 import { productAtom } from '../../recoil/product'
+import Button from '../basic/Button'
 import Label from '../basic/Label'
 import ProgressBar from './ProgressBar'
 
@@ -26,13 +27,22 @@ const UploadImg = () => {
   return (
     <>
       <div>
+        <Label htmlFor="product-images" className="">
+          Images
+        </Label>
+        <Button
+          className="mx-4 rounded-full w-auto"
+          label="+"
+          onClick={() => document?.getElementById('product-images')?.click()}
+          type={'submit'}
+        />
         <input
+          id="product-images"
           type="file"
           onChange={handleChange}
           disabled={progress !== 0 || images.length === 3}
-          className="text-primary-500 font-light dark:text-primary-300"
+          className="text-primary-500 font-light dark:text-primary-300 invisible"
         />
-        <Label className="ml-1">(Images Max 3)</Label>
       </div>
       <div>
         <ProgressBar progress={progress} />
