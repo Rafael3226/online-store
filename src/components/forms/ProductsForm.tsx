@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Navigate, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useSetRecoilState } from 'recoil'
 import FsCollection from '../../db/firestore'
 import { IProduct, productAtom, productDefault } from '../../recoil/product'
