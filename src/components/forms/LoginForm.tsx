@@ -58,7 +58,7 @@ function LoginForm() {
       />
       <div className="flex justify-center mt-4">
         <div className="w-1/2">
-          <Button type="button" onClick={handleLogin}>
+          <Button className="w-full" type="button" onClick={handleLogin}>
             <span className="text-white">Log in</span>
           </Button>
         </div>

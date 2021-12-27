@@ -72,7 +72,7 @@ function SingupForm() {
       />
       <div className="flex justify-center mt-4">
         <div className="w-1/2">
-          <Button type="reset" onClick={handleSingup}>
+          <Button className="w-full" type="reset" onClick={handleSingup}>
             <span className="text-white">Singup</span>
           </Button>
         </div>
