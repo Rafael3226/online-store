@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useRecoilValue, useSetRecoilState } from 'recoil'
+import { useRecoilState, useSetRecoilState } from 'recoil'
 import FsCollection from '../../db/firestore'
 import { errorAtom } from '../../recoil/error'
 import { loadingAtom } from '../../recoil/loading'
@@ -16,23 +16,15 @@ import UploadImg from '../upload/UploadImg'
 function ProductForm() {
   const navigate = useNavigate()
 
-  const product = useRecoilValue<IProduct>(productAtom)
+  const [{ id, name, price, description, images }, setProduct] =
+    useRecoilState<IProduct>(productAtom)
   const setError = useSetRecoilState<string>(errorAtom)
   const setLoading = useSetRecoilState(loadingAtom)
 
-  const [id, setId] = useState('')
-  const [name, setName] = useState('')
-  const [price, setPrice] = useState('')
-  const [description, setDescription] = useState('')
-  const [images, setImages] = useState<string[]>([])
-
-  useEffect(() => {
-    setId(product.id)
-    setName(product.name)
-    setPrice(product.price)
-    setDescription(product.description)
-    setImages(product.images)
-  }, [product])
+  function handleInputs(evt: { target: { name: any; value: any } }) {
+    const { name, value } = evt.target
+    setProduct((p) => ({ ...p, [name]: value }))
+  }
 
   function handleSave() {
     setLoading(true)
@@ -84,24 +76,27 @@ function ProductForm() {
     <>
       <div className="mb-8 flex justify-center">
         <Label className="text-4xl">
-          {id === '' ? 'Create Product' : 'Product Update'}
+          {`${id === '' ? 'Create' : 'Update'} Product`}
         </Label>
       </div>
       <Input
         label="Name"
         type="text"
-        onChange={(e) => setName(e.target.value)}
+        name="name"
+        onChange={handleInputs}
         value={name}
       />
       <Input
         label="Price"
         type="number"
-        onChange={(e) => setPrice(e.target.value)}
+        name="price"
+        onChange={handleInputs}
         value={price}
       />
       <TextArea
         label="Description"
-        onChange={(e) => setDescription(e.target.value)}
+        name="description"
+        onChange={handleInputs}
         value={description}
       />
       <UploadImg />
