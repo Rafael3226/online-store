@@ -43,6 +43,7 @@ function ProductsForm() {
               <CardHorisontal
                 key={product.id}
                 name={product.name}
+                price={product.price}
                 imgURL={product.images[0]}
                 description={product.description}
                 onClick={() => handleProduct(product)}
