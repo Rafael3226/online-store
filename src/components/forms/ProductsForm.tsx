@@ -37,16 +37,18 @@ function ProductsForm() {
         />
       </div>
       <div className="w-full flex justify-center">
-        {products &&
-          products.map((product: IProduct) => (
-            <CardHorisontal
-              key={product.id}
-              name={product.name}
-              imgURL={product.images[0]}
-              description={product.description}
-              onClick={() => handleProduct(product)}
-            />
-          ))}
+        <div className="w-3/4 grid grid-cols-1">
+          {products &&
+            products.map((product: IProduct) => (
+              <CardHorisontal
+                key={product.id}
+                name={product.name}
+                imgURL={product.images[0]}
+                description={product.description}
+                onClick={() => handleProduct(product)}
+              />
+            ))}
+        </div>
       </div>
     </>
   )

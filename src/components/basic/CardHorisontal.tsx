@@ -13,7 +13,7 @@ function CardHorisontal({
 }) {
   return (
     <div
-      className="w-3/4 border border-neutral-300 rounded  p-4 flex justify-start leading-normal"
+      className="w-full border border-neutral-300 rounded  p-4 flex justify-start leading-normal my-1"
       onClick={() => onClick()}
     >
       <div>
