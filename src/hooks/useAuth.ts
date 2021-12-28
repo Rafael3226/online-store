@@ -1,15 +1,13 @@
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useRecoilState, useSetRecoilState } from 'recoil'
-import { errorAtom } from '../recoil/error'
+import { useRecoilState } from 'recoil'
 import { IUser, userAtom } from '../recoil/user'
 
 function useAuth() {
   const [executed, setExecuted] = useState<boolean>(false)
   const auth = getAuth()
   const navigate = useNavigate()
-  const setError = useSetRecoilState(errorAtom)
   const [user, setUsuario] = useRecoilState(userAtom)
 
   function nextOrObserver(userCredential: any) {
@@ -27,7 +25,7 @@ function useAuth() {
   }
   function onError(error: { message: any }) {
     console.error(error)
-    setError('Auth Error ')
+    alert('Auth Error')
   }
   if (!executed) {
     setExecuted(true)

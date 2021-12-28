@@ -27,20 +27,20 @@ function ProductForm() {
   }
 
   function handleSave() {
+    setError('')
     setLoading(true)
     const collection = new FsCollection('products')
     collection
       .saveDocument({ name, price, description, images })
       .then(() => navigate('/products', { replace: true }))
       .then(() => alert('The product has been saved successfully'))
-      .catch((e) => {
-        setError(e.message)
-      })
+      .catch((e) => setError(e.message))
       .finally(() => {
         setLoading(false)
       })
   }
   function handleUpdate() {
+    setError('')
     setLoading(true)
     const collection = new FsCollection('products')
     collection
@@ -57,6 +57,7 @@ function ProductForm() {
       })
   }
   function handleDelete() {
+    setError('')
     setLoading(true)
     const collection = new FsCollection('products')
     collection

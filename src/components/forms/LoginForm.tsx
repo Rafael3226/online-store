@@ -23,6 +23,7 @@ function LoginForm() {
     if (!password || !email) {
       setError('Please fill in all the information')
     } else {
+      setError('')
       setLoading(true)
       setPersistence(auth, browserLocalPersistence).then(() =>
         signInWithEmailAndPassword(auth, email, password)

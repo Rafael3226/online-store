@@ -22,12 +22,13 @@ function SingupForm() {
 
   async function handleSingup(evt: React.MouseEvent<HTMLButtonElement>) {
     evt.preventDefault()
-    setError('')
+
     if (!password1 || !password2 || !email) {
       setError('Please fill in all the information')
     } else if (password1 !== password2) {
       setError('The passwords are different')
     } else {
+      setError('')
       setPersistence(auth, browserLocalPersistence).then(() =>
         createUserWithEmailAndPassword(auth, email, password1)
           .then(async (userCredential) => {

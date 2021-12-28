@@ -14,9 +14,10 @@ const UploadImg = () => {
 
   const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files
-    setError('')
+
     if (files && files[0]) {
       const file = files[0]
+      setError('')
       if (types.includes(file.type)) {
         setLoading(true)
         saveFile(file)
